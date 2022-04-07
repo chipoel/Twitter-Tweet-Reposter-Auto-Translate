@@ -6,6 +6,7 @@ translator= Translator(to_lang="ID") #Translate tweet to other language by chang
 
 consumer_key="xxx"
 consumer_secret="xxx"
+
 access_token="xxx"
 access_token_secret="xxx"
 
@@ -16,14 +17,14 @@ api = tweepy.API(auth)
 
 last_id = None
 
-def get_user_latest_tweet(username):
+def get_user_latest_tweet(screen_name):
     user_tweets = api.user_timeline(screen_name=screen_name, tweet_mode = "extended")
     if user_tweets:
         return user_tweets[0].full_text
     else:
         return None
 
-def get_user_latest_tweet_id(username):
+def get_user_latest_tweet_id(screen_name):
     user_tweets = api.user_timeline(screen_name=screen_name)
     if user_tweets:
         return user_tweets[0].id
@@ -37,7 +38,6 @@ def tweet(text):
 
 
 def clout_chase_tweet(famous_person):
-    my_latest_tweets = api.user_timeline(screen_name="username") #your twitter username
     famous_person_latest_tweet = get_user_latest_tweet(famous_person)
     famous_person_latest_tweet_id = get_user_latest_tweet_id(famous_person)
     global last_id
@@ -46,8 +46,8 @@ def clout_chase_tweet(famous_person):
             tweet(famous_person_latest_tweet)
             last_id = famous_person_latest_tweet_id
             print("Reposted: ", last_id)
-        except tweepy.TweepError as e:
-            print(e.reason)
+        except tweepy.TweepyException as e:
+            print(e.api_messages)
     else:
         print("Already Reposted!")
 
@@ -59,4 +59,4 @@ def tweet_loop():
 
 while True:
     tweet_loop()
-    sleep(61)
+    sleep(90)
