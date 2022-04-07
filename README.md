@@ -1,6 +1,8 @@
 # Twitter-Tweet-Reposter
 Twitter Automation to Repost Tweet
 
+This is for educational purpose
+
 How to Use:
 1. Install latest version of Python, recommendation: 3.8+
 
